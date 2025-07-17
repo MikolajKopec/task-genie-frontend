@@ -1,0 +1,47 @@
+<ng-container
+  *ngIf="message?.messageActionType === ReceiveMessageActionType.BOT_RESPONSE">
+  <div
+    class="chat-message chat-message-response w-max max-w-[70%]">
+    <span
+      class="whitespace-pre-wrap"
+      [innerHTML]="parseMessageData(message?.messageData || '')"></span>
+  </div>
+  <app-action-menu [messageText]="message?.messageData ?? ''"></app-action-menu>
+</ng-container>
+<div class="user-section" *ngIf="message?.messageActionType === ReceiveMessageActionType.USER_INPUT">
+  <div
+    class="chat-message chat-message-user w-max max-w-[70%] ">
+  <span
+    class="whitespace-pre-wrap"
+    [innerHTML]="parseMessageData(message?.messageData || '')"></span>
+  </div>
+  <div class="attachment-buttons">
+    <ng-container *ngFor="let file of message?.attachments || []; let i = index">
+      <button class="secondary-button file-button py-0"
+              mat-fab
+              [matTooltip]="file.filePath"
+              matTooltipPosition="below"
+              color="primary"
+              >
+        {{ '.' + file.fileType }}
+        <br>
+        <span class="mt-0">
+          {{ removeExtension(file.fileName) }}
+        </span>
+      </button>
+    </ng-container>
+  </div>
+</div>
+
+<div
+  *ngIf="!message"
+  class="chat-message waiting-response flex justify-center chat-message-waiting w-full my-3"
+  [ngClass]="{'waiting-response' : waitingFor=='response','waiting-input': waitingFor=='input'}"
+>
+  <div class="stage flex justify-center">
+    <div class="dot-flashing"></div>
+  </div>
+  <!--  <div class="loader"></div>-->
+</div>
+
+

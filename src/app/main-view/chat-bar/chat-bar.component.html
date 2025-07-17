@@ -1,0 +1,98 @@
+<div class="main-container">
+  <div class="path-container relative flex justify-start gap-2 items-center rounded-l-2xl mb-2">
+    <div [ngClass]="{'toggled': isToggledPath}" class="root-path w-full flex justify-start items-center">
+      <button
+        *ngIf="showDirectoryButton"
+        (click)="selectDirectory()"
+        matTooltip="Change bot directory"
+        i18n-matTooltip
+        matTooltipPosition="above"
+        class="secondary-button"
+        mat-mini-fab
+        color="primary">
+        <mat-icon>folder</mat-icon>
+      </button>
+      <div class="overflow-x-scroll text-nowrap mx-1" *ngIf="showRootPath">{{$currentRootPath | async}}</div> <!-- Conditionally display the path -->
+    </div>
+    <div (click)="togglePath()"
+         matTooltip="{{ isToggledPath ? untoggledMessage : toggledMessage }}"
+         matTooltipPosition="above"
+         class="toggle-path flex p-2 rounded-r-3xl justify-center items-center top-0 bottom-0 cursor-pointer absolute right-[-40px]">
+      <mat-icon *ngIf="!isToggledPath">arrow_back_ios</mat-icon>
+      <mat-icon *ngIf="isToggledPath">arrow_forward_ios</mat-icon>
+    </div>
+  </div>
+  <div class="actions-container flex justify-between">
+    <div class="file-list w-50 flex justify-start items-center gap-1 overflow-x-auto overflow-y-hidden">
+      <button  class="secondary-button !px-1.5 "
+               mat-fab
+               color="primary"
+               (click)="removeFile(i)" *ngFor="let file of files; let i = index">
+        {{ file.fileName }}
+      </button>
+    </div>
+  <div class="buttons-container w-50 mb-2 flex justify-end items-center gap-2">
+    <button
+      class="secondary-button"
+      id="voice"
+      i18n-matTooltip
+      matTooltip="Voice message"
+      matTooltipPosition="above"
+      (click)="transcribeToChat()"
+      mat-fab
+      color="primary"
+      [disabled]="($isWaitingForInput|async) || ($isWaitingForResponse|async)">
+      <mat-icon class="w-1/2 h-[24px]">keyboard_voice</mat-icon>
+    </button>
+    <button
+      class="secondary-button"
+      id="file"
+      mat-fab
+      color="primary"
+      matTooltip="Attach files"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="attachNewFile()">
+      <mat-icon>link</mat-icon>
+    </button>
+    <button
+      id="send"
+      class="!w-[150px] primary-button gap-2"
+      mat-fab
+      i18n-matTooltip
+      matTooltip="Send message"
+      matTooltipPosition="above"
+      (click)="sendMessageToElectron()"
+      [disabled]="($isWaitingForResponse|async) || ($isWaitingForInput|async) || isSendButtonDisabled"
+      color="primary">
+      <mat-icon>send</mat-icon>
+      <span i18n>SEND</span>
+    </button>
+  </div>
+  </div>
+  <mat-form-field class="textarea-container w-full">
+  <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            class="chat-textarea"
+            *ngIf="userInput !== null"
+            [(ngModel)]="userInput"
+            (keyup.enter)="userInput.trim() && sendMessageToElectron()"
+            (input)="onUserInputChanged($event)"
+            (dragover)="fileHover($event)"
+            (drop)="fileDrop($event)"
+            id="message"
+            spellcheck="false"
+            placeholder="Message your Task-Genie assistant"
+            i18n-placeholder></textarea>
+  </mat-form-field>
+  <div
+    class="drag-overlay"
+    [class.drag-overlay-visible]="isDragOver"
+    (dragover)="fileHover($event)"
+    (dragleave)="fileLeave($event)"
+    (drop)="fileDrop($event)"></div>
+
+</div>

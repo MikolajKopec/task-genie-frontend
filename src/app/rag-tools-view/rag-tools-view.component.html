@@ -1,0 +1,48 @@
+<ng-template #ragTemplate>
+<div *ngIf="currentSection" class="flex flex-col w-3/4 m-auto">
+  <h4>{{sections[currentIndex!].section_name}}</h4>
+  <mat-form-field class="form-field"  appearance="fill">
+    <mat-label>Section name</mat-label>
+    <input matInput [(ngModel)]="currentSection.section_name" placeholder="Nazwa sekcji">
+  </mat-form-field>
+  <mat-form-field class="form-field"  appearance="fill">
+    <mat-label i18n>Description</mat-label>
+    <textarea matInput [(ngModel)]="currentSection.prompt" placeholder="Opis"></textarea>
+  </mat-form-field>
+  <div>
+    <h4 i18n>Files</h4>
+    <div class="file-list flex justify-start items-center gap-1 flex-wrap">
+      <button  class="secondary-button !p-1.5 h-fit text-left"
+               matTooltip="Discard attachment"
+               i18n-matTooltip
+               matTooltipPosition="above"
+               mat-fab
+               color="primary"
+               (click)="removeFile(i)" 
+               (mouseover)="currentHoveredFile = file"
+               (mouseleave)="currentHoveredFile = null"
+               *ngFor="let file of currentSection.paths; let i = index">
+        <span *ngIf="currentHoveredFile === file">{{file}}</span>
+        <span *ngIf="currentHoveredFile !== file">{{ getShortenedPath(file) }}</span>
+      </button>
+    </div>
+    <button
+      class="secondary-button mt-2"
+      id="file"
+      mat-fab
+      color="primary"
+      matTooltip="Attach file"
+      i18n-matTooltip
+      matTooltipPosition="above"
+      (click)="addFiles()">
+      <mat-icon>link</mat-icon>
+    </button>
+  </div>
+
+  <button class="primary-button mt-2 rounded-sm" mat-raised-button color="primary" (click)="saveCurrentSection()" i18n>Save</button>
+</div>
+
+</ng-template>
+
+<app-list-select-view (selectedView)="changeCurrentSection($event)" [views]="sectionsList" [currentContent]="ragTemplate" [addView]="true">
+</app-list-select-view>

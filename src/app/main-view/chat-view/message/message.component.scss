@@ -1,0 +1,227 @@
+.chat-message-user{
+  color: var(--text-light-grey) !important;
+  background-color: var(--highlight-grey);
+  border: #373737  1px solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin-right:5px;
+  margin-bottom: 8px; /* Space between messages */
+  max-width: 80%;
+  align-self: flex-end; /* Aligns user messages to the right */
+}
+.chat-message-response{
+  padding: 10px;
+  border: var(--border-grey)  1px solid;
+  border-radius: 20px;
+
+}
+.chat-message{
+  line-height: 1.6;
+}
+
+.dot-flashing {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation-delay: 0.5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #9880ff;
+  color: #9880ff;
+}
+.waiting-response{
+  .dot-flashing {
+    animation: dot-flashing-response 1s infinite linear alternate;
+    animation-delay: 0.5s;
+  }
+  .dot-flashing::before, .dot-flashing::after {
+    animation: dot-flashing-response 1s infinite alternate;
+  }
+  .dot-flashing::after{
+    animation-delay: 1s;
+  }
+  .dot-flashing::before{
+    animation-delay: 0s;
+  }
+}
+.waiting-input{
+  .dot-flashing {
+    animation: dot-flashing-input 1s infinite linear alternate;
+    animation-delay: 0.5s;
+  }
+  .dot-flashing::before, .dot-flashing::after {
+    animation: dot-flashing-input 1s infinite alternate;
+  }
+  .dot-flashing::after{
+    animation-delay: 1s;
+  }
+  .dot-flashing::before{
+    animation-delay: 0s;
+  }
+}
+@keyframes dot-flashing-input {
+  0% {
+    background-color: #98ff80;
+  }
+  50%, 100% {
+    background-color: rgba(152, 128, 255, 0.2);
+  }
+}
+@keyframes dot-flashing-response {
+  0% {
+    background-color: #9880ff;
+  }
+  50%, 100% {
+    background-color: rgba(152, 128, 255, 0.2);
+  }
+}
+
+.chat-message-waiting {
+  animation: show 2s;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+
+}
+
+
+.user-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.attachment-buttons {
+  display: flex; /* instead of block */
+  flex-wrap: wrap;
+  justify-content: right;
+  span {
+    font-size: 10px;
+  }
+}
+
+.attachment-buttons .file-button {
+  margin-right: 2px!important; /* reduce the margin to make them closer together */
+  padding: 0px 10px!important; /* add some padding to make the button look better */
+  font-size: 12px; /* reduce the font size to make the button smaller */
+  height: auto; /* make the button height adjust to its content */
+  border-radius: 0px;
+  position: relative;
+  width: auto; /* make the button width adjust to its content */
+  max-width: 150px; /* set a maximum width for the button */
+  overflow: hidden; /* add this to prevent overflow */
+}
+
+.attachment-buttons .file-button span {
+  white-space: normal; /* allow the text to wrap to a new line */
+  word-break: break-all; /* break the words if necessary */
+}
+
+
+
+.attachment-buttons .file-button:first-child {
+  border-bottom-left-radius: 5px !important;
+  border-top-left-radius: 5px !important;
+}
+.attachment-buttons .file-button:last-child {
+  border-bottom-right-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  margin-right: 5px;
+}
+
+:host ::ng-deep .chat-message .link-container {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  border: 1px solid white !important;
+  border-radius: 4px !important;
+  padding: 8px !important;
+  margin: 8px 0 !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-break: break-all;
+}
+
+.chat-message .link-container > * {
+  margin-right: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.chat-message .link-container > *:last-child {
+  margin-right: 0 !important;
+}
+
+:host ::ng-deep .chat-message .code-container {
+  background: rgb(20, 20, 20) !important;
+  border: 1px solid #ddd !important;
+  border-left: 3px solid #9880ff !important;
+  color: #f1e8e8 !important;
+  page-break-inside: avoid;
+  font-family: monospace !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 1.6em !important;
+  max-width: 100% !important;
+  overflow: auto !important;
+  padding: 1em 1.5em !important;
+  display: block !important;
+  word-wrap: break-word !important;
+}
+
+:host ::ng-deep .chat-message .code-container button{
+    position: absolute !important;
+    top: 5px !important;
+    right: 5px !important;
+}
+
+:host ::ng-deep .chat-message table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+:host ::ng-deep .chat-message table, th, td {
+  border: 1px solid black !important;
+}
+
+:host ::ng-deep .chat-message th, td {
+  padding: 10px !important;
+  text-align: left !important;
+}

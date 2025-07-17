@@ -1,0 +1,28 @@
+.setting-container {
+  height: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+}
+mat-expansion-panel{
+  border: 2px solid var(--interactive-grey);
+  margin-top: 10px !important;
+  //margin-right: 0 !important;
+  //margin-left: 0 !important;
+  //padding-left: 0 !important;
+  //padding-right: 0 !important;
+}
+
+recursive-field
+
+mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.inner-container{
+  background: var(--interactive-grey);
+  border: solid 1px #ddd;
+  //border-radius: 5%;
+}

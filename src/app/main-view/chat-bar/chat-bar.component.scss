@@ -1,0 +1,73 @@
+.main-container{
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right:0;
+  min-height: 150px;
+  padding: 0 15px;
+  .textarea-container{
+  .chat-textarea{
+    width: 100%;
+    font-size: 16px;
+    resize: none;
+  }
+    .chat-textarea::placeholder{
+      color: gray;
+    }
+  }
+}
+.drag-overlay {
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height: 100%; /* Make it full-height */
+  border: 2px dotted #ccc;
+  padding: 10px;
+  text-align: center;
+  color: #ccc;
+  font-size: 12px;
+  display: none;
+  z-index: 1;
+}
+.drag-overlay-visible {
+  display: block;
+}
+
+.drag-overlay::before {
+  content: "Drop a file here";
+}
+
+.file-list {
+  height: calc(100% - 6px);
+  button {
+    width: fit-content;
+    font-size: 12px!important;
+    height: 40px;
+  }
+}
+
+
+.path-container{
+  transition: width 0.5s ease-in-out;
+  background-color: var(--interactive-grey);
+  width: 80%;
+  height: 40px; /* Set fixed height */
+  &:has(.root-path.toggled){
+    width: 0;
+  }
+  .root-path{
+    transition: width 0.5s ease-in-out;
+    &.toggled{
+    width:0;
+    overflow:hidden;
+  }
+}
+  .toggle-path{
+    background-color: var(--interactive-grey);
+    box-shadow: var(--mdc-fab-small-container-elevation-shadow);
+    &:hover{
+    background-color: var(--accent-subdued-blue-light);
+    }
+  }
+}

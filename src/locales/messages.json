@@ -1,0 +1,23 @@
+{
+  "locale": "en-US",
+  "translations": {
+    "4497525551250824404": "Change working directory",
+    "8364037468636167868": "Voice message",
+    "8064241129535695578": "Attach files",
+    "8740036082299980043": "Send message",
+    "7845324081198900071": "SEND",
+    "5543028912957555319": "Message your Task-Genie assistant",
+    "4150841219566290701": "Hide working directory",
+    "8508658127795592832": "Show working directory",
+    "2299187798995800780": "Chat",
+    "4930506384627295710": "Settings",
+    "1340126242902885264": "RAG Settings",
+    "5437172145642680301": "Section name",
+    "4902817035128594900": "Description",
+    "8703531459889520447": "Section description",
+    "4116911651502837995": "Files",
+    "8539998741786510084": "Discard attachment",
+    "3347859199210665796": "Attach file",
+    "3768927257183755959": "Save"
+  }
+}

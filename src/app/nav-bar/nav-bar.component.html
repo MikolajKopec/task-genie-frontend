@@ -1,0 +1,55 @@
+<div class="navbar flex justify-end items-center pt-3 pb-3">
+  <div class="w-full px-2 flex gap-2 justify-start">
+    <button matTooltip="Przejdź do czatu"
+            matTooltipPosition="above" class="navbar-button" mat-fab color="primary" routerLink=""
+            [ngClass]="{'active': router.url ==='/'}">
+      <mat-icon>chat</mat-icon>
+    </button>
+    <button matTooltip="Settings"
+            i18n-matTooltip
+            matTooltipPosition="above" class="navbar-button" mat-fab color="primary" routerLink="/settings"
+            [class.active]="router.url === '/settings'">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button matTooltip="Bot knowledge base"
+            i18n-matTooltip
+            matTooltipPosition="above" class="navbar-button" mat-fab color="primary" routerLink="/rag-tools"
+            [class.active]="router.url === '/rag-tools'">
+      <mat-icon>description</mat-icon>
+    </button>
+        <button matTooltip="Saved prompts"
+        i18n-matTooltip
+        matTooltipPosition="above" class="navbar-button" mat-fab color="primary">
+    <mat-icon>collections_bookmark</mat-icon>
+    </button>
+  </div>
+  <button
+    matTooltip="Secret keys"
+    matTooltipPosition="above"
+    class="account-button mr-2" mat-fab color="primary">
+    <mat-icon>vpn_key</mat-icon>
+  </button>
+  <button
+    matTooltip="Ustawienia użytkownika"
+    matTooltipPosition="above"
+    class="account-button mr-2" mat-fab color="primary" [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+  </button>
+<!--  <span class="w-[75px] ml-2 mr-5 text-right"><img src="./assets/logo.png"></span>-->
+</div>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>account_box</mat-icon>
+    <span>Profil</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>payment</mat-icon>
+    <span>Licencja</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Wyloguj się</span>
+  </button>
+</mat-menu>

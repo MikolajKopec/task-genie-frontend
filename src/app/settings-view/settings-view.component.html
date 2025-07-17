@@ -1,0 +1,19 @@
+<!--<div class="settings-container h-full flex flex-row-reverse">-->
+<!--  <div class="right-nav w-[300px] flex flex-col items-center pt-2">-->
+<!--    <button *ngFor="let setting of availableSettings; index as i;"-->
+<!--            class="secondary-button w-[80%] mb-2"-->
+<!--            mat-raised-button-->
+<!--            (click)="changeCurrentSetting(i)">-->
+<!--      {{ setting.schema.title }}-->
+<!--    </button>-->
+<!--  </div>-->
+<!--  <div class="w-full">-->
+<!--    -->
+<!--  </div>-->
+<!--</div>-->
+
+<app-list-select-view (selectedView)="changeCurrentSetting($event)" [views]="views" [currentContent]="settingViewTemplate">
+</app-list-select-view>
+<ng-template #settingViewTemplate>
+  <app-settings-form *ngIf="currentSetting !== null" [setting]="currentSetting"></app-settings-form>
+</ng-template>

@@ -1,0 +1,29 @@
+<div class=" w-full h-[94%] flex flex-col justify-center items-center">
+  <span class="text-3xl mb-4">Rejestracja</span>
+  <mat-form-field class="form-field w-[240px]" [color]=""  appearance="fill">
+    <mat-label>Nazwa użytkownika</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field class="form-field w-[240px]" [color]=""  appearance="fill">
+    <mat-label>Adres email</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+  <mat-form-field class="form-field w-[240px]" [color]=""  appearance="fill">
+    <mat-label>Hasło</mat-label>
+    <input matInput type="password">
+  </mat-form-field>
+  <mat-form-field class="form-field w-[240px]" [color]=""  appearance="fill">
+    <mat-label>Powtórz hasło</mat-label>
+    <input matInput type="password">
+  </mat-form-field>
+  <mat-slide-toggle class="w-[240px]">Akceptuje <a href="#">regulamin</a></mat-slide-toggle>
+  <button class="primary-button rounded-sm mt-3 w-[240px]" mat-raised-button color="primary" type="submit">Zarejestruj się</button>
+  <button
+    class="secondary-button rounded-sm mt-3 w-[240px]"
+    mat-raised-button
+    routerLink=""
+    type="button"
+    color="primary">
+    Powrót
+  </button>
+</div>

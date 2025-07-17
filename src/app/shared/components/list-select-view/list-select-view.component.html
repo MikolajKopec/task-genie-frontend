@@ -1,0 +1,17 @@
+<div class="settings-container h-full flex flex-row-reverse">
+  <div class="right-nav w-[300px] flex flex-col items-center pt-2">
+    <button *ngFor="let view of views; index as i;"
+            class="secondary-button w-[80%] mb-2"
+            mat-raised-button
+            (click)="selectView(view,i)">
+      {{ view }}
+    </button>
+    <button *ngIf="addView" class="primary-button mt-2"  type="button" mat-mini-fab (click)="addNewView()">+</button>
+  </div>
+    <div class="w-full overflow-x-auto">
+      <ng-container *ngIf="!currentContent">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="currentContent">
+      </ng-container>
+    </div>
+</div>

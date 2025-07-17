@@ -1,0 +1,12 @@
+<ng-container *ngIf="!($isUserLoggedIn | async)">
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</ng-container>
+<ng-container *ngIf="!($isInitialized | async) && ($isUserLoggedIn | async)">
+  <app-loading-view></app-loading-view>
+  <app-footer></app-footer>
+</ng-container>
+<ng-container *ngIf="($isInitialized | async) && ($isUserLoggedIn | async)">
+  <app-nav-bar class="fade-in w-full"></app-nav-bar>
+  <router-outlet class="fade-in" />
+</ng-container>

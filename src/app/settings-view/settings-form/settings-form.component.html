@@ -1,0 +1,37 @@
+<div class="setting-container">
+  <form class="text-center flex justify-center flex-wrap gap-3 items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="basic-field w-1/3 mx-3" *ngFor="let field of staticFields">
+      <ng-container [ngSwitch]="field.value.type">
+        <mat-form-field class="form-field" [color]=""  *ngSwitchCase="AvailableTypes.String" appearance="fill">
+          <mat-label>{{ field.key }}</mat-label>
+          <textarea matInput [formControlName]="field.key" placeholder="{{ field.key }}"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="form-field" *ngSwitchCase="AvailableTypes.Integer" appearance="fill">
+          <mat-label>{{ field.key }}</mat-label>
+          <input matInput type="number" [formControlName]="field.key" placeholder="{{ field.key }}">
+        </mat-form-field>
+
+        <mat-checkbox class="!text-white" *ngSwitchCase="AvailableTypes.Boolean" [formControlName]="field.key">
+          {{ field.key }}
+        </mat-checkbox>
+      </ng-container>
+      <mat-form-field class="form-field" *ngIf="getPropertyType(field.value,field.defs) === AvailableTypes.Enum" appearance="fill">
+        <mat-label>{{ field.key }}</mat-label>
+        <mat-select [formControlName]="field.key">
+          <mat-option *ngFor="let option of getEnumValues(field.value)" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <ng-container *ngFor="let dynamicField of dynamicFields">
+      <app-settings-form-recursive class="recursive-form w-full" [alreadyEditedFormValues]="alreadyEditedFormValues ? alreadyEditedFormValues[dynamicField.key][dynamicField.key]: null" [fieldValues]="setting?.values![dynamicField.key]" [Field]="dynamicField" [values]="setting!.values![dynamicField.key]" [parentForm]="form"></app-settings-form-recursive>
+    </ng-container>
+
+    <div class="text-center w-full">
+      <button class="primary-button mt-2 rounded-sm" mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+
+  </form>
+</div>

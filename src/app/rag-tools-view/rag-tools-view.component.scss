@@ -1,0 +1,19 @@
+.file-list {
+  height: calc(100% - 6px);
+  button {
+    width: fit-content;
+    font-size: 12px!important;
+    height: 40px;
+  }
+}
+
+.primary-button {
+  width: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.secondary-button {
+  transition: width 0.5s ease;
+}

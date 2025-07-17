@@ -1,0 +1,75 @@
+
+<mat-accordion class="mb-2">
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{Field!.title !==undefined ? Field!.title : Field!.key ?? "No title or key"}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <ng-template matExpansionPanelContent>
+      <div class="setting-container">
+        <form class="setting-form-recursive py-2" [formGroup]="form!">
+          <div class="flex flex-col gap-1" [formArrayName]="Field!.key">
+            <ng-container *ngFor="let control of getFormArray().controls; index as i;">
+              <div class="inner-container" [formGroupName]="i">
+
+                <div class="text-center">
+                  <button class="secondary-button mb-2" *ngIf="getPropertyType(Field!.value!,Field?.defs)!==AvailableTypes.Object"  type="button" mat-mini-fab  (click)="removeFromFormArray(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <div class="recursive-field text-center" *ngFor="let field of staticFields">
+                  <ng-container [ngSwitch]="field.value.type">
+                    <mat-form-field class="form-field" *ngSwitchCase="AvailableTypes.String" appearance="fill">
+                      <mat-label>{{ field.key }}</mat-label>
+                      <textarea matInput cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="5" [formControlName]="field.key" placeholder="{{ field.key }}"></textarea>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field" *ngSwitchCase="AvailableTypes.Integer" appearance="fill">
+                      <mat-label>{{ field.key }}</mat-label>
+                      <input matInput type="number" [formControlName]="field.key" placeholder="{{ field.key }}">
+                    </mat-form-field>
+
+                    <mat-checkbox *ngSwitchCase="AvailableTypes.Boolean" [formControlName]="field.key">
+                      {{ field.key }}
+                    </mat-checkbox>
+                  </ng-container>
+                  <mat-form-field class="form-field" *ngIf="getPropertyType(field.value,field.defs) === AvailableTypes.Enum" appearance="fill">
+                    <mat-label>{{ field.key }}</mat-label>
+                    <mat-select [formControlName]="field.key">
+                      <mat-option *ngFor="let option of getEnumValues(field.value)" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field *ngIf="getPropertyType(field.value, field.defs) === AvailableTypes.ArrayOfNormalTypes" appearance="fill" class="form-field">
+                    <mat-label>{{ field.key }}</mat-label>
+                    <textarea matInput cdkTextareaAutosize
+                              #autosize="cdkTextareaAutosize"
+                              cdkAutosizeMinRows="1"
+                              cdkAutosizeMaxRows="10" [formControlName]="field.key" placeholder="{{ field.key }}" (input)="onInputChange($event, field.key)"></textarea>
+                  </mat-form-field>
+
+
+                </div>
+
+
+              </div>
+            </ng-container>
+          </div>
+          <div class="text-center">
+            <button  class="primary-button mt-2" *ngIf="getPropertyType(Field!.value!,Field?.defs)!==AvailableTypes.Object"  type="button" mat-mini-fab (click)="addToFormArray()">+</button>
+          </div>
+          <ng-container *ngFor="let dynamicField of dynamicFields">
+            <app-settings-form-recursive class="recursive-form w-full" [fieldValues]="fieldValues ? fieldValues[dynamicField.key] : undefined" [parentForm]="parentForm" [parentControls]="form!.controls[Field!.key]" [Field]="dynamicField" [values]="values![dynamicField.key]" [parentDefs]="Field!.defs![Field!.key+'_fields']"></app-settings-form-recursive>
+          </ng-container>
+        </form>
+      </div>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>

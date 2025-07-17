@@ -1,0 +1,12 @@
+.settings-container{
+  height: calc(100% - 110px);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .right-nav{
+    border-left:1px solid var(--interactive-grey)
+
+  }
+}
+
+

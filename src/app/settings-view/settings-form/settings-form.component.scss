@@ -1,0 +1,11 @@
+.setting-container {
+  overflow-x: hidden;
+  height: calc(100% - 73px);
+  overflow-y: auto;
+  .basic-field{
+    width: fit-content;
+  }
+}
+mat-expansion-panel{
+  border: 1px solid var(--interactive-grey)
+}

@@ -1,0 +1,18 @@
+<div class="chat-container overflow-y-auto pt-3 pl-1" #chatContainer>
+  <ng-container *ngFor="let message of responseMessages">
+    <app-message
+      *ngIf="message.sender === Sender.USER"
+      class="flex-row-reverse flex"
+      [message]="message"></app-message>
+    <app-message
+      *ngIf="message.sender === Sender.INTERFACE"
+      [message]="message"></app-message>
+  </ng-container>
+  <app-message
+    *ngIf="($isWaitingForResponse|async)"
+    [waitingFor]="'response'"
+    (animationstart)="scrollChatToBottom()"></app-message>
+  <app-message
+    [waitingFor]="'input'"
+    *ngIf="($isWaitingForInput|async)"></app-message>
+</div>
